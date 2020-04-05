@@ -13,26 +13,35 @@
         <label id="label-register" for="log-reg-show">Login</label>
         <input type="radio" name="active-log-panel" id="log-reg-show"  checked="checked">
       </div>
-                
       <div class="register-info-box">
         <h2>Esqueceu sua senha?</h2>
         <p>Preencha seu e-mail para resetar sua senha.</p>
         <label id="label-login" for="log-login-show">Recuperar senha.</label>
         <input type="radio" name="active-log-panel" id="log-login-show">
-      </div>
-                
+      </div>     
       <div class="white-panel">
-        <div class="login-show">
-          <h2>LOGIN</h2>
-          <input type="text" placeholder="Email">
-          <input type="password" placeholder="Password">
-          <input type="button" value="Login">
-        </div>
-        <div class="register-show">
-          <h2>ESQUECEU SUA SENHA?</h2>
-          <input type="text" placeholder="Email">
-          <input type="button" value="Recuperar">
-        </div>
+        {%if form.errors %}
+        <p>Usuário ou senha inválidos, verifique!</p>
+        {% endif %}
+        <form action="{% url 'login' %}" method="POST">
+          {% csrf_token %}
+          <div class="login-show">
+            <h2>LOGIN</h2>
+            <label for="" style="color: black;">Email</label>
+            {{ form.username }}
+            <label for="" style="color: black;">Password</label>
+            {{ form.password }}
+            <input type="submit" value="Login" class=".login-show button" name="login">
+          </div>
+        </form>
+        <form action="#" method="POST">
+          {% csrf_token %}
+          <div class="register-show">
+            <h2>ESQUECEU SUA SENHA?</h2>
+            <input type="text" placeholder="Email" name="email_recovery">
+            <input type="submit" value="Recuperar" class=".register-show submit">
+          </div>
+        </form>
       </div>
     </div>
   </body>
@@ -161,12 +170,12 @@ a{
 .login-show input[type="text"], .login-show input[type="password"]{
     width: 100%;
     display: block;
-    margin:20px 0;
+    margin: 0 0 20px 0;
     padding: 15px;
     border: 1px solid #b5b5b5;
     outline: none;
 }
-.login-show input[type="button"] {
+.login-show input[type="submit"] {
     max-width: 150px;
     width: 100%;
     background-color: #444444;
@@ -187,12 +196,12 @@ a{
 .register-show input[type="text"], .register-show input[type="password"]{
     width: 100%;
     display: block;
-    margin:20px 0;
+    margin: 0 0 20px 0;
     padding: 15px;
     border: 1px solid #b5b5b5;
     outline: none;
 }
-.register-show input[type="button"] {
+.register-show input[type="submit"] {
     max-width: 150px;
     width: 100%;
     background-color: #444444;

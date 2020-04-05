@@ -41,6 +41,10 @@ INSTALLED_APPS = [
     'appdigiconsult',
 ]
 
+# criando a rota de login no settings
+LOGIN_URL = '/  accounts/login/'
+LOGIN_REDIRECT_URL = '/'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
