@@ -7,5 +7,10 @@ urlpatterns = [
     path('', home, name='home'),
     path('admin/', admin.site.urls),
     path('login/', login, name='login'),
+    path('logout/', logout, name='logout'),
+    path('pacientes/', pacientes, name='pacientes'),
+    path('paciente/add/', pacienteadd, name='pacienteadd'),
+
+    # login
     path('accounts/', include('django.contrib.auth.urls')),
 ]

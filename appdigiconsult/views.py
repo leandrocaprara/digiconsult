@@ -11,7 +11,7 @@ from django.contrib.auth.forms import AuthenticationForm
 # Create your views here.
 
 # view para retornar o index.html
-@login_required(login_url="accounts/login/")
+@login_required(login_url="/accounts/login/")
 def home(request):
     return render(request, 'home.html')
 
@@ -23,8 +23,24 @@ def login(request):
         if form.is_valid():
             email = form.get_user()
             login(request, email)
-            return redirect('home')
+            if 'next' in request.POST:
+                return redirect(request.POST.get('next'))
+            else:
+                return redirect('home')
         else:
             form = AuthenticationForm(data = request.POST)
 
-    return render(request, 'accounts/login.html', {'form': form})
+    return render(request, '/accounts/login.html', {'form': form})
+
+def logout(request):
+    logout(request)
+    return render(request, 'login.html')
+
+@login_required(login_url="/accounts/login/")
+def pacientes(request):
+    return render(request, 'pacientes.html')
+
+@login_required(login_url="/accounts/login/")
+def pacienteadd(request):
+    return render(request, 'pacienteadd.html')
+

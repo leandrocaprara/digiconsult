@@ -20,7 +20,7 @@
         <input type="radio" name="active-log-panel" id="log-login-show">
       </div>     
       <div class="white-panel">
-        {%if form.errors %}
+        {% if form.errors %}
         <p>Usuário ou senha inválidos, verifique!</p>
         {% endif %}
         <form action="{% url 'login' %}" method="POST">
@@ -31,6 +31,9 @@
             {{ form.username }}
             <label for="" style="color: black;">Password</label>
             {{ form.password }}
+            {% if request.GET.next %}
+            <input type="hidden" name="next" value="{{ request.GET.next }}">
+            {% endif %}
             <input type="submit" value="Login" class=".login-show button" name="login">
           </div>
         </form>
