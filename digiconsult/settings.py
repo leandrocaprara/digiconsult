@@ -42,8 +42,9 @@ INSTALLED_APPS = [
 ]
 
 # criando a rota de login no settings
-LOGIN_URL = '/  accounts/login/'
+LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/accounts/login/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
