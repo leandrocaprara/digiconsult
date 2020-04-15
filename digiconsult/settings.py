@@ -38,8 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # registrando apps no settings do projeto
+    'crispy_forms',
     'appdigiconsult',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # criando a rota de login no settings
 LOGIN_URL = '/accounts/login/'

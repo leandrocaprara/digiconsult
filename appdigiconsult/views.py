@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import AuthenticationForm
+from . import forms
 
 # Create your views here.
 
@@ -41,6 +42,7 @@ def pacientes(request):
     return render(request, 'pacientes.html')
 
 @login_required(login_url="/accounts/login/")
-def pacienteadd(request):
-    return render(request, 'pacienteadd.html')
+def pacientesadd(request):
+    form = forms.PacientesAdd
+    return render(request, 'pacientesadd.html', {'form': form})
 
