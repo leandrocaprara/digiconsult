@@ -7,7 +7,8 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import AuthenticationForm
-from . import forms
+from .forms import *
+from .models import *
 
 # Create your views here.
 
@@ -39,10 +40,17 @@ def logout(request):
 
 @login_required(login_url="/accounts/login/")
 def pacientes(request):
-    return render(request, 'pacientes.html')
+    pacientes = Pacientes.objects.all()
+    return render(request, 'pacientes.html', {'pacientes': pacientes})
 
 @login_required(login_url="/accounts/login/")
 def pacientesadd(request):
-    form = forms.PacientesAdd
+    form = PacientesAdd(request.POST or None)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect('/pacientes/')
+        else:
+            form = PacientesAdd()
     return render(request, 'pacientesadd.html', {'form': form})
 
