@@ -39,7 +39,8 @@
                       {{ Paciente.cpf }}
                     </td>
                     <td class="text-primary">
-                      
+                      <a href="{% url 'pacientesedit' Paciente.id %}"><span class="material-icons">create</span></a>
+                      <a href="{% url 'pacientesdel' Paciente.id %}"><span class="material-icons">delete</span></a>
                     </td>
                   </tr>
                   {% endfor %}
